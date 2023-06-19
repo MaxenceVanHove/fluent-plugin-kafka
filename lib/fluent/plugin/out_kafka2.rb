@@ -96,6 +96,7 @@ DESC
     end
 
     include Fluent::KafkaPluginUtil::AwsIamSettings
+    include Fluent::KafkaPluginUtil::AzureMsiSettings
     include Fluent::KafkaPluginUtil::SSLSettings
     include Fluent::KafkaPluginUtil::SaslSettings
 
@@ -115,6 +116,7 @@ DESC
       begin
         logger = @get_kafka_client_log ? log : nil
         use_long_lived_aws_credentials = @sasl_aws_msk_iam_access_key_id != nil && @sasl_aws_msk_iam_secret_key_id != nil
+        use_azure_msi_authentication = @sasl_azure_msi_auth != false
         if @scram_mechanism != nil && @username != nil && @password != nil
           sasl_params = {
             sasl_scram_username: @username,
@@ -132,6 +134,11 @@ DESC
             sasl_aws_msk_iam_secret_key_id: @sasl_aws_msk_iam_secret_key_id,
             sasl_aws_msk_iam_aws_region: @sasl_aws_msk_iam_aws_region,
           }
+        elsif use_azure_msi_authentication
+          sasl_params = {
+            sals_azure_imds_api_version: @sals_azure_imds_api_version,
+            sals_azure_token_refresh_interval: @sals_azure_token_refresh_interval
+          }          
         else
           sasl_params = {
             sasl_gssapi_principal: @principal,
