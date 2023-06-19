@@ -136,8 +136,8 @@ DESC
           }
         elsif use_azure_msi_authentication
           sasl_params = {
-            sals_azure_imds_api_version: @sals_azure_imds_api_version,
-            sals_azure_token_refresh_interval: @sals_azure_token_refresh_interval
+            sasl_azure_imds_api_version: @sasl_azure_imds_api_version,
+            sasl_azure_token_refresh_interval: @sasl_azure_token_refresh_interval
           }          
         else
           sasl_params = {
