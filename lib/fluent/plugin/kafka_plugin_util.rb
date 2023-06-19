@@ -20,7 +20,7 @@ module Fluent
                         desc: "The Instance Metadata Service is used during the OAuth flow to obtain an access token. This API is versioned and specifying the version is mandatory."
           config_param  :sals_azure_token_refresh_interval, :int, default => 60,
                         desc: "When using MSI, the initial access token needs to be refreshed periodically."
-          config_param  :sasl_azure_msi_auth, :bool, default: false,
+          config_param  :sasl_azure_msi_auth, :bool, default => false,
                         desc: "Boolean to activate Azure MDI authentication"                        
         end
       end
